@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "author": "osmar",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-s3-devkitc-1", "id": "esp", "top": 9.42, "left": -225.83, "attrs": {} },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": -169.66,
+      "left": -220.57,
+      "attrs": { "i2cAddress": "60" }
+    },
+    { "type": "wokwi-mpu6050", "id": "imu1", "top": -5.78, "left": -362.48, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": 6, "left": -25, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 157.85,
+      "left": -395,
+      "rotate": 180,
+      "attrs": { "value": "4700" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -34.45,
+      "left": -9.6,
+      "attrs": { "value": "200" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 119.45,
+      "left": -395,
+      "rotate": 180,
+      "attrs": { "value": "4700" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3.1", "imu1:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "imu1:GND", "black", [ "h-28.85", "v-259.2", "h-48.08" ] ],
+    [ "esp:3V3.2", "oled1:VCC", "red", [ "h-38.45", "v-240", "h86.25" ] ],
+    [ "esp:GND.1", "oled1:GND", "black", [ "v57.6", "h134.35", "v-508.8", "h-96" ] ],
+    [ "esp:8", "oled1:SDA", "green", [ "h-48.05", "v-374.4", "h115.13" ] ],
+    [ "esp:9", "oled1:SCL", "green", [ "h-57.65", "v-336" ] ],
+    [ "esp:2", "led1:A", "gold", [ "h0" ] ],
+    [ "led1:C", "r2:1", "gold", [ "h-18.8", "v-38.4", "h-0.8", "v-38.4" ] ],
+    [ "r2:2", "esp:GND.1", "black", [ "v316.8", "h-269.95" ] ],
+    [ "esp:8", "imu1:SDA", "blue", [ "h0" ] ],
+    [ "esp:9", "imu1:SCL", "green", [ "h0" ] ],
+    [ "imu1:SDA", "r3:1", "blue", [ "v0" ] ],
+    [ "r3:2", "esp:3V3.1", "red", [ "v0" ] ],
+    [ "imu1:SCL", "r1:1", "green", [ "v0" ] ],
+    [ "r1:2", "esp:3V3.1", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
